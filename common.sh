@@ -14,7 +14,7 @@ MYSQL_HOST=mysql.daws90s.shop
 
 sudo mkdir -p $LOGS_FOLDER
 
-echo "$(date "+%Y-%m-%d %H:%M:%S") | Script started executing at: $(date)" | tee -a $LOGS_FILE
+echo "$(date "+%Y-%m-%d %H:%M:%S") [INFO] Script started executing at: $(date)" | tee -a $LOGS_FILE
 
 check_root(){
     if [ $USERID -ne 0 ]; then
@@ -74,7 +74,7 @@ app_setup(){
         useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
         VALIDATE $? "Creating system user"
     else
-        echo -e "Roboshop user already exist ... $Y SKIPPING $N"
+        echo -e "$(date "+%Y-%m-%d %H:%M:%S") [INFO] Roboshop user already exist ... $Y SKIPPING $N"
     fi
 
     # downloading the app
@@ -110,5 +110,5 @@ app_restart(){
 }
 
 print_total_time(){
-    echo -e "$(date "+%Y-%m-%d %H:%M:%S") | Script execute in: $G $SECONDS seconds $N" | tee -a $LOGS_FILE
+    echo -e "$(date "+%Y-%m-%d %H:%M:%S") [INFO] Script executed in: $G $SECONDS seconds $N" | tee -a $LOGS_FILE
 }
